@@ -1,0 +1,196 @@
+
+@font-face {
+    font-family: Play;
+    src: url("./fonts/PlayBold.ttf");
+}
+
+
+
+html, body {
+    background-color: #033076;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    height: 65px;
+    background-color: #0c59cf;
+    padding: 0 57px;
+}
+
+header .right {
+    float: right;
+}
+
+header .left, header .right {
+    display: inline-block;
+    color: white;
+    transform: scale(.8);
+}
+
+header .header_logo {
+    font-family: Play;
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 60px;
+    text-shadow: 0px 6px 8px #021f54;
+    transform: scale(.8);
+}
+
+header .right a {
+    font-family: "Helvetica", sans-serif;
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 65px;
+    margin-left: 70px;
+}
+
+header .right a.active {
+    color: white;
+    font-weight: bold;
+}
+
+
+.main {
+    width: 100%;
+    height: 800px;
+    display: block;
+}
+
+
+.wrap {
+    height: 790px;
+    width: 980px;
+    margin: 0 auto;
+    background-color: white;
+    font-family: "Helvetica", sans-serif;
+    color: #0c59cf;
+    padding: 10px 0px 0px 0px;
+    display: block;
+}
+
+.title {
+    font-size: 65px;
+    font-weight: bold;
+    margin: 15px 0 15px;
+    color: #0844a4;
+    transform: scale(.8);
+}
+
+.title2 {
+    font-size: 36px;
+    transform: scale(.8);
+}
+
+.title3 {
+    font-size: 26px;
+    transform: scale(.8);
+}
+
+.combo-block {
+    border: 8px solid #0c59cf;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-right: -40px;
+    width: 824px;
+    height: 380px;
+    transform: scale(.8);
+}
+
+.combo-block .block {
+    height: 110px;
+    padding: 30px 40px;
+}
+
+.block .block-title {
+    margin-top: -50px;
+    
+}
+.block .block-title span {
+    border: 5px solid #0c59cf;
+    border-radius: 9px;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 3px 10px;
+    background-color: white;
+}
+
+.block input {
+    border: 0px ridge #206ee6;
+    border-radius: 10px;
+    text-align: center;
+    width: 628px;
+    height: 73px;
+    margin: 30px 0;
+    font-size: 35px;
+    display: inline-block;
+    box-shadow: inset 0 0 4px 4px #0c59cf;
+}
+
+.block input::-webkit-input-placeholder {
+    font-size: 34px;
+    color: rgba(20, 100, 246, 0.33);
+}
+
+.block .status {
+    width: 73px;
+    height: 73px;
+    border: 2px solid #888888;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 28px;
+    margin-right: 0px;
+    float: right;
+}
+
+.combo-block .action-block {
+    text-align: center;
+    margin-bottom: -35px;
+}
+.combo-block .action-block button {
+    background-color: #0c59cf;
+    border-radius: 11px;
+    border: 0;
+    padding: 14px 70px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+.combo-block .action-block button:hover {
+    cursor: pointer;
+}
+
+
+
+
+.separator {
+    height: 7px;
+    background-color: #0c59cf;
+    width: 100.4%;
+}
+
+
+
+
+footer {
+    background-color: #012255;
+    height: 85px;
+    width: 100%;
+    margin-bottom: -20px;
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 var Cookies = require('cookies');
-var dbScript = require("../db/dbscript.js");
 var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({
     extended: false

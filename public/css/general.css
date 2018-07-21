@@ -1,0 +1,16 @@
+.scrollbar-track-y {
+    width: 14px !important;
+    background-color: #02183b !important;
+}
+
+.scrollbar-thumb-y {
+    width: 10px !important;
+    background-color: rgba(199, 215, 251, 0.41) !important;
+    border-radius: 20px !important;
+    margin: 0 auto !important;
+    margin-left: 1.5px  !important;
+}
+
+
+
+

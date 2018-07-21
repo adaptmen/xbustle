@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/user/user.css">
+    <link rel="stylesheet" href="css/general.css">
     <link href="css/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
     <title>
         user
     </title>
 </head>
+<script src="/js/smooth-scrollbar.js"></script>
 
 <body>
     <div id="app">
@@ -22,7 +24,9 @@
                 <div class="right-btns">
                     <div class="head-btn" id="mail"><i class="mdi mdi-email-outline"></i></div>
                     <div class="head-btn" id="notify"><i class="mdi mdi-bell-outline"></i></div>
-                    <div class="head-btn" id="user"><%= user.name %></div>
+                    <div class="head-btn" id="user">
+                        <%= user.name %>
+                    </div>
                 </div>
             </div>
         </header>
@@ -46,43 +50,9 @@
             </div>
         </left-bar>
         <app-area>
-            <main>
-<!--
-                <div class="task-block">
-                    <div class="task-info">
-                        <div class="task_title">Разработка модуля ПО</div>
-                        <div class="task_creater"><%= user.name %></div>
-                    </div>
-                    <div class="task-execute">
-                        <div class="task_period_start">23.07.18</div>
-                        <div class="task_progress">
-                            <div class="task_progress_part finished"></div>
-                            <div class="task_progress_part finished"></div>
-                            <div class="task_progress_part finished"></div>
-                            <div class="task_progress_part finished"></div>
-                            <div class="task_progress_part"></div>
-                            <div class="task_progress_part"></div>
-                            <div class="task_progress_part"></div>
-                        </div>
-                        <div class="task_period_end">28.07.18</div>
-                    </div>
-                </div>
-                <h3>Приветствуем!</h3>
-                <label for="task_title">Название задачи</label><br>
-                <input name="task_title" type="text"><br>
-                <label for="task_desc">Описание задачи</label><br>
-                <input name="task_desc" type="text"><br>
-                <label for="task_to">Исполнитель задачи</label><br>
-                <select name="task_to" type="text"></select><br>
 
-                <div class="tasks">
-                    Активные задачи
-                </div>
-
-                <button class="socket-btn">Socket test</button><br>
-                <button class="view-btn">View test</button>
--->
-           <% include task/add %>
+            <main class="scroll-conten">
+                <% include task/add %>
             </main>
         </app-area>
         <footer>
@@ -93,6 +63,13 @@
 <script src="/js/socket.io.js"></script>
 <script src="/js/socket-client.js"></script>
 <script>
+    $('app-area').css('overflow', 'auto');
+    Scrollbar.init($('app-area')[0], {
+        thumbMinSize: 100,
+        damping: 0.5
+    });
+
+
     var ctx = socketContext(io, 'http://localhost:4000');
     var socket = ctx.socket;
 
@@ -103,7 +80,7 @@
         socket.username = generalUser;
 
         for (let user in generalTeam) {
-            $('select[name=task_to]')[0].innerHTML += `<option value=${generalTeam[user].id}>${generalTeam[user].name}</option>`;
+            //$('select[name=task_to]')[0].innerHTML += `<option value=${generalTeam[user].id}>${generalTeam[user].name}</option>`;
         }
     });
 
@@ -149,7 +126,6 @@
         $('.tasks')[0].innerHTML +=
             `<h4>${data.title}</h4><p>${data.creater}</p><h5>${data.desc}</h5>`;
     });
-    
 </script>
 
 </html>

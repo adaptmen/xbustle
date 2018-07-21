@@ -3,14 +3,12 @@ var router = express.Router();
 var mysql = require('mysql');
 var session = require('express-session');
 var Cookies = require('cookies');
-var dbScript = require("../db/dbscript.js");
 var socketContext = require('../core/socket');
 var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
 });
 var sha1 = require('sha1');
-var sqlGen = require('../db/sqlGenerator');
 var io = require('socket.io').listen(4000);
 var db = require("../core/db")();
 

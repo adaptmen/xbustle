@@ -22,8 +22,11 @@
     padding: 15px;
 }
 
-.content_block .input input:focus {
+.content_block .input input:focus,
+.content_block .input-area textarea:focus
+{
     border-bottom-color: #06ff00;
+    outline: none;
 }
 
 .content_block .input-area textarea {
@@ -31,16 +34,14 @@
     border-bottom: 3px solid #646664;
     width: calc(100% - 30px);
     background-color: #010630;
-    height: 40px;
+    height: 35px;
     font-family: PlayRegular;
     font-size: 30px;
     color: white;
     padding: 15px;
+    overflow: hidden;
 }
 
-.content_block .input-area textarea:focus {
-    border-bottom-color: #06ff00;
-}
 
 
 

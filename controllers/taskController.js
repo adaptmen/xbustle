@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../core/db')();
 var Cookies = require('cookies');
+var validator = require('../core/validator');
 var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
@@ -15,11 +16,7 @@ router.get('/task/add', (req, res) => {
 
 router.post('/task/add', urlencodedParser, (req, res) => {
 
-    let task = req.body.task; //as Object (task: { start: ..., end: ... })
-
-
-    // Validator must be here
-
+    let task = validator.validateData(req.body.task);
 
     db.table('tasks').insert(task).then(result => res.send('Задача успешно сохранена'),
         err => res.send('Задача не сохранена!'));
@@ -55,11 +52,8 @@ router.get('/task/from-user/:user_id', (req, res) => {
 
 router.post('/task/update/:task_id', (req, res) => {
     
-    let task_id = req.params.task_id;
-    let new_task = req.body.task;
-    
-    //Validator must be here!!!
-    
+    let task_id = validator.validateData(req.params.task_id);
+    let new_task = validator.validateData(req.body.task);  
     
     db.table('tasks').where({taskNum: task_id}).set(new_task).update().then((result) => {
         return res.send('Результат выполнения: ' + result)

@@ -7,9 +7,10 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-var login_page = require('./routes/login');
-var signup_page = require('./routes/signup');
-var user_page = require('./routes/user');
+var login_controller = require('./controllers/loginController');
+var signup_controller = require('./controllers/signupController');
+var user_controller = require('./controllers/userController');
+var task_controller = require('./controllers/taskController');
 
 var app = express();
 
@@ -29,18 +30,11 @@ app.use(session({
   cookie: { maxAge: 60000000 }
 }))
 
-app.all('(/|/login)', login_page);
-app.get('/logout', login_page);
-app.all('/signup', signup_page);
-app.get('/user', user_page);
-
-app.get('/task/add', (req, res) => {
-    return { 
-        html: res.render('task/add'),
-        active: 'add'
-    }
-});
-
+app.all('(/|/login)', login_controller);
+app.get('/logout', login_controller);
+app.all('/signup', signup_controller);
+app.get('/user', user_controller);
+app.all('/task(/*)', task_controller);
 
 
 // catch 404 and forward to error handler

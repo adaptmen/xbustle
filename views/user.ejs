@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/user/user.css">
     <link rel="stylesheet" href="css/general.css">
     <link href="css/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="/js/jquery.min.js"></script>
     <title>
         user
     </title>
@@ -51,7 +51,7 @@
         </left-bar>
         <app-area>
 
-            <main class="scroll-conten">
+            <main>
                 <% include task/add %>
             </main>
         </app-area>
@@ -60,6 +60,7 @@
         </footer>
     </div>
 </body>
+<script src="/js/windowManager.js"></script>
 <script src="/js/socket.io.js"></script>
 <script src="/js/socket-client.js"></script>
 <script>

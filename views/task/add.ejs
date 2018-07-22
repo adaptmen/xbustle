@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/task/add.css" />
 <script src="/js/jquery.ns-autogrow.min.js"></script>
 
-<div class="content_block">
+<div class="content_block" data_label="task_title">
     <div class="label">
         Название
     </div>
@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="content_block">
+<div class="content_block" data_label="task_desc">
     <div class="label">
         Общее описание
     </div>
@@ -19,46 +19,44 @@
     </div>
 </div>
 
-<div class="content_block">
+<div class="content_block" data_label="task_notes">
     <div class="label">
         Примечания
     </div>
     <div class="input-area">
         <textarea type="text"></textarea>
     </div>
+    <div class="notes">
+        
+    </div>
+</div>
+
+<!--
+    <div id="loader">
+        <div class="sk-circle">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
+        </div>
+    </div>
+-->
+<div class="content_block">
+
 </div>
 
 
 <script>
-    
-    $('.input-area textarea').autogrow({vertical: true, horizontal: false});
-    
+    $('.input-area textarea').autogrow({
+        vertical: true,
+        horizontal: false
+    });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

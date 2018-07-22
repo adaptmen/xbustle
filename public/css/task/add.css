@@ -40,11 +40,60 @@
     font-size: 30px;
     color: white;
     padding: 15px;
+    padding-bottom: 30px;
     overflow: hidden;
+    text-align: left;
+}
+.content_block .input-area {
+    text-align: center;
+}
+.content_block .input-area .tip {
+    font-family: Helvetica;
+    color: #9bc1fb;
+    position: relative;
+    top: -31px;
+    height: 26px;
+    transition: .4s all ease;
+    font-size: 15px;
+}
+
+.content_block .input-area .tip:hover {
+    transition: .4s all ease;
+    background-color: #4cff6e;
+    content: "Добавить";
+    color: #2e2e2e;
 }
 
 
 
+.notes {
+    margin-top: -27px;
+}
+
+.note {
+    width: calc(100% - 60px);
+    background-color: #010630;
+    min-height: 46px;
+    font-family: PlayRegular;
+    font-size: 33px;
+    color: white;
+    padding: 5px;
+    padding-left: 56px;
+    margin-top: 4px;
+    line-height: 46px;
+}
+
+.note:before {
+    display: block;
+    position: absolute;
+    background-color: #5bff3a;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    content: " ";
+    margin-left: -32px;
+    margin-top: 17px;
+}
 
 
 

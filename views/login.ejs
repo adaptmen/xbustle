@@ -43,7 +43,7 @@
         
     </footer>
 	
-    <script src="js/window-helper.js"></script>
+    <script src="/js/WindowManager.js"></script>
     <script>
 		$('.send').on('click', function() {
 			let login = $('input[name=login]').val();
@@ -52,7 +52,7 @@
 			$.post({
 				url: '/login',
 				data: {
-					login: login,
+					username: login,
 					password: password
 				},
 				success: function(data) {

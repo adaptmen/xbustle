@@ -33,7 +33,7 @@ app.use(session({
 app.all('(/|/login)', login_controller);
 app.get('/logout', login_controller);
 app.all('/signup', signup_controller);
-app.get('/user', user_controller);
+app.get('/user|/user/', user_controller);
 app.all('/task(/*)', task_controller);
 
 

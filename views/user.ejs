@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/user/user.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link href="css/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/user/user.css">
+    <link rel="stylesheet" href="/css/general.css">
+    <link href="/css/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
     <script src="/js/jquery.min.js"></script>
     <title>
         user
@@ -24,8 +24,9 @@
                 <div class="right-btns">
                     <div class="head-btn" id="mail"><i class="mdi mdi-email-outline"></i></div>
                     <div class="head-btn" id="notify"><i class="mdi mdi-bell-outline"></i></div>
+                    <div class="head-btn" id="settings"><i class="mdi mdi-settings"></i></div>
                     <div class="head-btn" id="user">
-                        <%= user.name %>
+                        
                     </div>
                 </div>
             </div>
@@ -71,16 +72,18 @@
     });
 
 
-    var ctx = socketContext(io, 'http://localhost:4000');
+    var ctx = socketContext(io, 'http://localhost:4040');
     var socket = ctx.socket;
+    var wm = WindowManager;
 
     socket.on('complete', function(data) {
-        console.log(data);
         window.generalTeam = data.team;
         window.generalUser = data.user;
+        console.log(data);
         socket.username = generalUser;
 
         for (let user in generalTeam) {
+            wm.header.user_btn.replace(generalUser.name)
             //$('select[name=task_to]')[0].innerHTML += `<option value=${generalTeam[user].id}>${generalTeam[user].name}</option>`;
         }
     });
@@ -94,6 +97,15 @@
                 });
                 $(`left-bar .menu-bar .menu-items #add`).toggleClass('active');
                 $('app-area main').html(data);
+            }
+        });
+    });
+    
+    $('header #settings').click(() => {
+        $.get({
+            url: '/user/settings',
+            success: (data) => {
+                wm.app.replace(data);
             }
         });
     });
@@ -113,6 +125,8 @@
             console.log(res);
         });
     });
+    
+    ctx.send('test', 'Test', (data) => {console.log(data)});
 
     ctx.listen('msg', function(data) {
         console.log(data);

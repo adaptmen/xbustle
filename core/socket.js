@@ -1,10 +1,10 @@
 function socketContext (io) {
     
-    var socket;
+    var _socket;
     
     var send = {
         self: (eventName, data) => { 
-            socket.emit(eventName, data)
+            _socket.emit(eventName, data)
         },
     
         allAndSelf: (eventName, data) => {
@@ -12,7 +12,7 @@ function socketContext (io) {
         },
 
         all: (eventName, data) => {
-            socket.broadcast.emit(eventName, data);
+            _socket.broadcast.emit(eventName, data);
         },
 
         toRoomAndSelf: (roomName, eventName, data) => {
@@ -20,22 +20,22 @@ function socketContext (io) {
         },
 
         toRoom: (roomId, eventName, data) => {
-            socket.broadcast.to(roomId).emit(eventName, data);
+            _socket.broadcast.to(roomId).emit(eventName, data);
         },
 
         toSocket: (socketId, eventName, data) => {
-            socket.broadcast.to(socketId).emit(eventName, data);
+            _socket.broadcast.to(socketId).emit(eventName, data);
         }
     }
     
     var listen = (eventName, callback, once) => {
         once 
-            ? socket.once(eventName, callback)
-            : socket.on(eventName, callback)
+            ? _socket.once(eventName, callback)
+            : _socket.on(eventName, callback)
     };
     
     var joinTo = (roomId) => {
-        socket.join(roomId);
+        _socket.join(roomId);
     };
     
     var getRoom = (roomName) => {
@@ -43,8 +43,8 @@ function socketContext (io) {
     };
     
     var connect = (callback) => {
-        io.once('connection', (_socket) => {
-            socket = _socket;
+        io.once('connection', (socket) => {
+            _socket = socket;
             callback(socket);
         }); 
     };
@@ -62,7 +62,7 @@ function socketContext (io) {
         send: send,
         listen: listen,
         joinTo: joinTo,
-        socket: socket,
+        socket: _socket,
         getRoom: getRoom,
         disconnect: disconnect,
         reconnect: reconnect,
@@ -71,27 +71,3 @@ function socketContext (io) {
 }
 
 module.exports = socketContext;
-
-// sending to sender-client only
- /*socket.emit('message', "this is a test");
-
- // sending to all clients, include sender
- io.emit('message', "this is a test");
-
- // sending to all clients except sender
- socket.broadcast.emit('message', "this is a test");
-
- // sending to all clients in 'game' room(channel) except sender
- socket.broadcast.to('game').emit('message', 'nice game');
-
- // sending to all clients in 'game' room(channel), include sender
- io.in('game').emit('message', 'cool game');
-
- // sending to sender client, only if they are in 'game' room(channel)
- socket.to('game').emit('message', 'enjoy the game');
-
- // sending to all clients in namespace 'myNamespace', include sender
- io.of('myNamespace').emit('message', 'gg');
-
- // sending to individual socketid
- socket.broadcast.to(socketid).emit('message', 'for your eyes only');*/

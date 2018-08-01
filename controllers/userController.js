@@ -10,6 +10,7 @@ var urlencodedParser = bodyParser.urlencoded({
 var sha1 = require('sha1');
 var io = require('socket.io').listen(4040);
 var db = require("../core/db")();
+var errorer = require("../core/error_module/error_module");
 
 var connSockets = {
     room: '',
@@ -18,20 +19,31 @@ var connSockets = {
 
 var usersDict = {};
 
-router.get('/user/settings', (req, res) => {
-
-    res.render('user/settings', {
-        title_area: 'Личные данные',
-        user: {
-            name: {
-                name: 'Денис',
-                family: 'Ворончихин',
-                otch: 'Андреевич'
-            },
-            email: 'adaptmen@gmail.com'
-        }
-    })
-
+router.post('login', (req, res) => {
+	let cookie = new Cookies(req, res);
+	let user = req.body.user
+	let isValidUser = Validator.user(user);
+	if (isValidUser ) {
+		db
+		.table('users')
+		.where({
+			login: user.login,
+			password: user.password
+		})
+		.get()
+		.then(
+			(result) => {
+				result !== []
+					? cookie.set('token', result[0].token)
+					: return res.send(errorer(900));
+			},
+			(error) => {
+				return res.send(errorer(700, error));
+			}
+		);
+	} else {
+		return res.send(errorer(800));
+	}			
 });
 
 

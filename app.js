@@ -7,10 +7,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-var login_controller = require('./controllers/loginController');
-var signup_controller = require('./controllers/signupController');
-var user_controller = require('./controllers/userController');
-var task_controller = require('./controllers/taskController');
+var api_controller = require('./controllers/apiController');
 
 var app = express();
 
@@ -38,14 +35,8 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'dist/xbustle/index.html'))
 });
 
-//app.all('(/|/login)', login_controller);
-//app.get('/logout', login_controller);
-//app.all('/signup', signup_controller);
-//app.get('/user|/user/', user_controller);
-//app.all('/task(/*)', task_controller);
+app.all('/api/*', api_controller);
 
-
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;

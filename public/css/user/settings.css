@@ -2,9 +2,9 @@
 
 .title {
     font-family: Helvetica;
-    font-size: 26px;
+    font-size: 32px;
     color: #9bc1fb;
-    margin: 0 10px;
+    margin: 0 0px 20px;
 }
 
 
@@ -12,11 +12,11 @@
     font-family: Helvetica;
     font-size: 16px;
     color: #9bc1fb;
-    margin-bottom: 7px;
+    margin-bottom: -3px;
 }
 
 .content-block .input {
-    margin-bottom: 7px;
+    margin-bottom: 12px;
 }
 
 .content-block .input .u-input {

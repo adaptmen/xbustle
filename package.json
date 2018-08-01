@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "concurrently \"node ./bin/www\" \"cd src && ng serve\"",
+    "prod": "node ./bin/www",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

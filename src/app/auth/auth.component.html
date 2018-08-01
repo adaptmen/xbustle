@@ -1,4 +1,19 @@
-<h3>Домашняя страница</h3>
-<div class="auth">
-  <router-outlet></router-outlet>
+<div class="body">
+  <header>
+    <div id="logo">XBustle</div>
+    <div class="btns">
+      <a
+       routerLink="/reg"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}"
+      >Регистрация</a>
+      <a
+       routerLink="/login"
+       routerLinkActive="active"
+      >Войти</a>
+    </div>
+  </header>
+  <div class="auth">
+    <router-outlet></router-outlet>
+  </div>
 </div>

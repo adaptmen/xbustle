@@ -1,15 +1,16 @@
 .title 
-  color: rgba(12, 26, 49, 0.87)
+  color: rgba(234, 234, 234, 0.87)
   font-family: PlayBold
   font-size: 36px
   margin: 10px 0
-  text-shadow: 0 2px 3px #15152a, 0 2px 0px #7777c6
+  text-shadow: -1px -1px #000, 0 1px 0 #444
+  margin-top: -5px
   
 input
   border: 2px groove #15152a
   background-color: transparent
   margin: 10px 0
-  width: 260px
+  width: calc(100% - 50px)
   padding: 8px 8px
   text-align: center
   font-family: PlayRegular
@@ -25,10 +26,10 @@ input
   
 button
   display: block
-  margin: 3px auto
+  margin: 17px auto 0
   border: 2px groove #15152a
   background-color: transparent
-  width: 280px
+  width: calc(100% - 30px)
   padding: 8px 8px
   text-align: center
   font-family: PlayRegular
@@ -38,5 +39,38 @@ button
   box-shadow: inset 0 -10px 160px 5px #15152a
   
   &:focus
-      outline: none
+    outline: none
+  &:hover
+    cursor: pointer
+  
+.help-text
+  display: block
+  margin: -5px auto 2px
+  width: calc(100% - 40px)
+  padding: 3px 3px
+  text-align: left
+  font-family: PlayRegular
+  font-size: 13px
+  border-radius: 5px
+  line-height: 14px
+  
+  &.warn
+    border: 2px solid rgba(248, 0, 20, 0.73)
+    background-color: rgba(0, 0, 0, 0.57)
+    color: #ffdbdb
+    border-radius: 5px
+    box-shadow: inset 0 0px 70px 6px rgba(142, 0, 0, 0.75)
+    
+    .mdi:before
+      font-size: 13px
+      padding: 3px 4px 0
+  
+  
+  
+  
+  
+  
+  
+  
+  
     

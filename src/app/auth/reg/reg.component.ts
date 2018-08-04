@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'xb-reg',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegComponent implements OnInit {
 
-  constructor() { }
+  formSignup: FormGroup;
+  emailExist: boolean;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.formSignup = new FormGroup({
+      'email': new FormControl(null, [Validators.required, Validators.email])
+    });
+  }
+  
+  onSubmit() {
+    this.authService.login(this.formSignup.value)
+      .subscribe(
+        (res) => {
+          console.log(res)
+        }
+      );
+  }
+  
+  onClick() {
   }
 
 }

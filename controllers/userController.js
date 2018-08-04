@@ -19,11 +19,13 @@ var connSockets = {
 
 var usersDict = {};
 
-router.post('login', (req, res) => {
+router.post('/api/user/login', (req, res) => {
 	let cookie = new Cookies(req, res);
-	let user = req.body.user
-	let isValidUser = Validator.user(user);
-	if (isValidUser ) {
+	let user = req.body.user;
+    console.log(user);
+	let isValidUser = user;
+  
+	if (isValidUser) {
 		db
 		.table('users')
 		.where({
@@ -34,15 +36,19 @@ router.post('login', (req, res) => {
 		.then(
 			(result) => {
 				result !== []
-					? cookie.set('token', result[0].token)
-					: return res.send(errorer(900));
+					? (() => {
+                        cookie.set('token', result[0].token);
+                        res.send(errorer(200));
+                      })()
+					: res.send(errorer(900));
 			},
 			(error) => {
-				return res.send(errorer(700, error));
+				res.send(errorer(700, error));
 			}
 		);
-	} else {
-		return res.send(errorer(800));
+	}
+    else {
+		res.send(errorer(800));
 	}			
 });
 

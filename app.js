@@ -19,12 +19,12 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist/xbustle')));
 
+app.all('/api/*', api_controller);
 
-app.all('*', function (req, res) {
+app.all('*[^/api]', function (req, res) {
     res.sendFile(path.join(__dirname, 'dist/xbustle/index.html'))
 });
 
-app.use('/api/*', api_controller);
 
 app.disable('etag');
 

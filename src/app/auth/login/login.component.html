@@ -1,0 +1,18 @@
+<div class="title">Вход</div>
+<form [formGroup]="formLogin" (ngSubmit)="onSubmit()" (click)="onClick()">
+  <input type="text" placeholder="Логин" formControlName="login">
+  <span 
+    class="help-text warn"
+    *ngIf="formLogin.get('login').invalid && formLogin.get('login').touched"
+  >
+    <i class="mdi mdi-alert"></i>&nbsp;Логин не может быть пустым
+  </span>
+  <input type="password" placeholder="Пароль" formControlName="password">
+  <span
+   class="help-text warn"
+   *ngIf="formLogin.get('password').invalid && formLogin.get('password').touched"
+  >
+    <i class="mdi mdi-alert"></i>&nbsp;Пароль не может быть пустым
+  </span>
+  <button type="submit">Войти</button>
+</form>

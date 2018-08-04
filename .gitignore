@@ -1,9 +1,18 @@
 /config/config.json
 /node_modules
 /pictures
+/public/css
+/dist
+/e2e
 .htaccess
 .htpasswd
 .brackets.json
+README.md
+package.json
+package-lock.json
+angular.json
+tsconfig.json
+tslint.json
 
 
 

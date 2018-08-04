@@ -1,0 +1,11 @@
+<div class="title">Регистрация</div>
+<form [formGroup]="formSignup" (ngSubmit)="onSubmit()" (click)="onClick()">
+  <input type="text" placeholder="Email" formControlName="email">
+  <span 
+    class="help-text warn"
+    *ngIf="formSignup.get('email').invalid && formLogin.get('email').touched"
+  >
+    <i class="mdi mdi-alert"></i>&nbsp;Заполните поле электронной почты
+  </span>
+  <button type="submit">Зарегистрироваться</button>
+</form>

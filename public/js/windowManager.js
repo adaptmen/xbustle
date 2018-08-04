@@ -5,6 +5,10 @@ var WindowManager = function () {
     var get = (selector) => $(selector)[0];
 
     var app = get('app-area main');
+    var header = {
+        _main: get('header'),
+        user_btn: get('header #user')
+    };
     var toolbar = {
         _main: get('left-bar'),
         title: get('left-bar .menu-bar .menu-title'),
@@ -66,6 +70,7 @@ var WindowManager = function () {
     return {
         app: app,
         toolbar: toolbar,
+        header: header,
         init: init(),
         get: get
     }

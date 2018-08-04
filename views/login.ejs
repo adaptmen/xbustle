@@ -5,29 +5,54 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/login.css">
-    <script
-	  src="js/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <title>Вход</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-	<h2>Вход</h2>
-	<h3>Введите ваш логин и пароль, которые мы выслали Вам на почту</h3>
-    <label for="username">Логин</label>
-    <input type="text" name='username' />
-	<label for="password">Пароль</label>
-    <input type="text" name='password' />
-    <button id="send">Отправить</button>
-    
+    <header>
+        <div class="header_logo left">XBustle</div>
+        <div class="right">
+            <a href="/signup" class="btn">Регистрация</a>
+            <a href="/login" class="btn active">Вход</a>
+        </div>
+    </header>
+    <main>
+        <div class="wrap">
+            <div class="title">Вход</div>
+            <div class="title2">Введите ваш логин и пароль для входа в систему</div>
+            <div class="combo-block">
+                <div class="block name">
+                    <div class="block-title"><span>Ваш логин</span></div>
+                    <input type="email" name="login" placeholder="Логин">
+<!--                    <div class="status"></div>-->
+                </div>
+                <div class="separator"></div>
+                <div class="block email">
+                    <div class="block-title"><span>Ваш пароль</span></div>
+                    <input type="text" name="password" placeholder="Пароль">
+<!--                    <div class="status"></div>-->
+                </div>
+                <div class="action-block">
+                    <button class="send">Отправить</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+	
+    <script src="/js/WindowManager.js"></script>
     <script>
-		$('#send').on('click', function() {
-			let username = $('input[name=username]').val();
+		$('.send').on('click', function() {
+			let login = $('input[name=login]').val();
 			let password = $('input[name=password]').val();
 			
 			$.post({
 				url: '/login',
 				data: {
-					username: username,
+					username: login,
 					password: password
 				},
 				success: function(data) {

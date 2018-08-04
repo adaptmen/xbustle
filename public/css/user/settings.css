@@ -1,0 +1,75 @@
+
+
+.title {
+    font-family: Helvetica;
+    font-size: 32px;
+    color: #9bc1fb;
+    margin: 0 0px 20px;
+}
+
+
+.content-block .setting-title {
+    font-family: Helvetica;
+    font-size: 16px;
+    color: #9bc1fb;
+    margin-bottom: -3px;
+}
+
+.content-block .input {
+    margin-bottom: 12px;
+}
+
+.content-block .input .u-input {
+    border: 0;
+    width: calc(100% - 30px);
+    background-color: transparent;
+    height: 20px;
+    font-family: PlayRegular;
+    font-size: 30px;
+    color: white;
+    padding: 10px;
+}
+
+.content-block .input .u-input:focus
+{
+    border-bottom: 3px solid #06ff00;
+    outline: none;
+    background-color: #010630;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

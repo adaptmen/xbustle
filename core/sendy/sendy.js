@@ -1,9 +1,9 @@
-const error_codes = require("./error-codes.json");
+const error_codes = require("./sendy_codes.json");
 
-module.exports = (errNum, error) => {
+module.exports = (code, error) => {
 	return {
-		errorCode: errNum,
-		errorText: error_codes[errNum],
+		status_code: code,
+		status_text: error_codes[code],
 		error: error ? error : ""
 	}
 }

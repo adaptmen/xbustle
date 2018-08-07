@@ -41,6 +41,25 @@ router.post('/api/user/login', (req, res) => {
     );
 });
 
+router.get('/api/user/islogged', (req, res) => {
+  db
+    .table('users')
+    .where({
+      token: req.cookies.token
+    })
+    .get()
+    .then(
+      (result) => {
+        result !== []
+          ? res.send(sendy("user_found"))
+          : res.send(sendy("user_not_found"))
+      },
+      (error) => {
+        res.send(sendy("db_connection_error", error))
+      }
+    )
+});
+
 
 router.get('/api/user/logout', function (req, res) {
   res.cookie.set('token', '');
@@ -75,7 +94,7 @@ router.post('/api/user/signup', urlencodedParser, (req, res) => {
       .then(
         (info) => {
           res.send(sendy("email_success"))
-        }
+        },
         (err) => {
           res.send(sendy("email_error", err))
         }

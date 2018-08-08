@@ -1,0 +1,13 @@
+<form formGroup="formTask" (ngSubmit)="onSubmit()">
+  <label>Название</label>
+  <input formControlName="title" type="text">
+  <label>Описание</label>
+  <input formControlName="desc" type="text">
+  <label>Исполнитель</label>
+  <select formControlName="executer">
+    <option *ngFor="let cpnion of companions" value="{{ cpnion.userNum }}">
+      {{ cpnion.name }}
+    </option>
+  </select>
+  <button type="submit">Создать</button>
+</form> 

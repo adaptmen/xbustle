@@ -1,3 +1,40 @@
-<p>
-  user works!
-</p>
+<div class="body">
+  <header>
+    <div id="logo">XBustle</div>
+    <div class="center btns">
+      <a
+       routerLink="/tasks"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}"
+      >Задачи</a>
+      <a
+       routerLink="/team"
+       routerLinkActive="active"
+      >Моя команда</a>
+    </div>
+    <div class="right btns">
+<!--     <i class="mdi mdi-email-outline"></i>-->
+      <div class="btn-combo">
+        Денис
+        <div class="combo">
+          <div class="combo-item">
+            <a routerLink="/settings">Настройки</a>
+          </div>
+           <div class="combo-item">
+            <a routerLink="/logout">Выйти</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="middle">
+   <div class="left">
+     <div class="user-avatar"></div>
+     <div class="user-info">
+       <div class="user-name"></div>
+       <div class="user-desc"></div>
+     </div>
+   </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

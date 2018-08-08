@@ -12,6 +12,8 @@ let generateSecret = () => {
 
 var generateToken = generateSecret;
 
+var currentUser = {};
+
 
 var generateLogin = (email) => {
   let name = email.match('([^@]+)@([^@]+)')[1];
@@ -22,5 +24,6 @@ var generateLogin = (email) => {
 module.exports = {
   generateToken: generateToken,
   generatePassword: generateSecret().slice(0, 13),
-  generateLogin: generateLogin
+  generateLogin: generateLogin,
+  currentUser: currentUser
 }

@@ -30,6 +30,7 @@ router.post('/api/user/login', (req, res) => {
         result !== []
           ?
           (() => {
+            userService.currentUser = result[0];
             res.cookie.set('token', result[0].token);
             res.send(sendy("db_success"));
           })()
@@ -51,7 +52,10 @@ router.get('/api/user/islogged', (req, res) => {
     .then(
       (result) => {
         result !== []
-          ? res.send(sendy("user_found"))
+          ? (() => {
+            userService.currentUser = result[0];
+            res.send(sendy("user_found"))
+          })()
           : res.send(sendy("user_not_found"))
       },
       (error) => {

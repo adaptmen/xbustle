@@ -9,16 +9,11 @@ var urlencodedParser = bodyParser.urlencoded({
 var db = require("../core/db")();
 
 var user_controller = require('./userController');
-var task_controller = require('./taskController');
+var tasks_controller = require('./tasksController');
+var team_controller = require('./teamController');
 
 router.all('/api/user/*', user_controller);
-router.all('/api/task/*', task_controller);
-
-router.get('/logout', function (req, res) {
-    let cookie = new Cookies(req, res);
-    cookie
-        .set('token', '');
-    return res.redirect('/login');
-});
+router.all('/api/task/*', tasks_controller);
+router.all('/api/team/*', team_controller);
 
 module.exports = router;

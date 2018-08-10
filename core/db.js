@@ -39,7 +39,6 @@ var dbContext = () => {
         
         insert: (_query) => {
             let result_str = "INSERT INTO `" + _query.tableName + "`";
-
             let keys_str, values_str = '';
 
             for (let key in _query.params) {
@@ -77,30 +76,36 @@ var dbContext = () => {
 
     let _query = {};
     
-    let db_obj = function (data) {
+    let db_obj = function () {
         return {
-            _query: data,
-            insert: insert,
-            get: get,
-            where: where,
-            table: table,
-            set: set
+            _query,
+            insert,
+            get,
+            where,
+            table,
+            set,
+            params
         }
     };
 
     var table = (tableName) => {
         _query.tableName = tableName;
-        return new db_obj(_query);
+        return new db_obj();
     };
     
     var where = (params) => {
         _query.where = params;
-        return new db_obj(_query);
+        return new db_obj();
     };
     
     var set = (params) => {
         _query.set = params;
-        return new db_obj(_query);
+        return new db_obj();
+    };
+  
+    var params = (params) => {
+      _query.params = params;
+      return new db_obj();
     };
     
     var get = () => {
@@ -117,11 +122,12 @@ var dbContext = () => {
     
 
     return {
-        table: table,
-        where: where,
-        get: get,
-        insert: insert,
-        update: update
+        table,
+        where,
+        get,
+        insert,
+        update,
+        params,
     };
 
 };

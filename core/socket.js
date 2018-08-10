@@ -49,13 +49,17 @@ function socketContext (io) {
         }); 
     };
     
-    var reconnect = (callback) => {
-        listen('reconnect', callback, true);
-    };
-    
     var disconnect = (callback) => {
         listen('disconnect', callback, true);
     };
+  
+    var _context = {
+      send,
+      listen,
+      _socket,
+      getRoom,
+      disconnect
+    }
     
     
     return {
@@ -65,8 +69,8 @@ function socketContext (io) {
         socket: _socket,
         getRoom: getRoom,
         disconnect: disconnect,
-        reconnect: reconnect,
-        connect: connect
+        connect: connect,
+        context: _context
     }
 }
 

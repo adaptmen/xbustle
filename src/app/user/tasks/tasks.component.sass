@@ -1,0 +1,86 @@
+.main
+  display: grid
+  grid-template-columns: 220px 1fr
+  width: 100%
+  height: 100%
+  
+.left
+  background-color: #202c60
+  grid-column: 1
+  
+  .user-block
+    background-color: #01163a
+    height: 100px
+    
+    .user-avatar, .user-info
+      display: inline-block
+      
+    .user-avatar
+      width: 56px
+      height: 56px
+      border-radius: 50%;
+      background-color: #0c59cf
+      color: #021f54
+      padding: 0
+      margin: 20px 15px
+      
+      .mdi
+        font-size: 70px
+        position: relative
+        top: -10px
+        left: -7px
+        
+    .user-info
+      position: relative
+      top: -26px
+      
+      .user-name
+        font-family: Helvetica
+        color: white
+        
+        
+  .links-list
+    font-family: Helvetica
+    
+    .link-title
+      height: 58px
+      color: #bbdefb
+      background-color: #003a93
+      font-size: 23px
+      font-weight: bold
+      line-height: 58px
+      padding-left: 14px
+      
+    .link-item
+      a
+        padding: 7px 3px 7px 20px
+        color: #a3a9af
+        text-decoration: none
+        font-size: 18px
+        height: 30px
+        display: block
+        width: calc(100% - 23px)
+        border-bottom: 2px solid #0d47a1
+        line-height: 28px
+        
+      &.active
+        background-color: rgba(69, 137, 224, 0.5)
+        
+        a
+          color: #bbdefb
+        
+      &:last-child
+        a
+          border-bottom: none
+  
+.right
+  grid-column: 2
+  padding: 7px 7px 7px 25px
+    
+  
+  
+  
+  
+  
+  
+  

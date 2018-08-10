@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'xb-auth',
@@ -8,10 +9,12 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, authService: AuthService) { 
+    this.router = router;
+  }
 
   ngOnInit() {
-    this.router.navigate(['/login']);
+    return this.router.navigate(['/login']);
   }
 
 }

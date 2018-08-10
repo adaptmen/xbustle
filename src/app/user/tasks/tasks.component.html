@@ -1,0 +1,29 @@
+<div class="main">
+  <div class="left">
+    <div class="user-block">
+      <div class="user-avatar">
+        <i class="mdi mdi-account-circle"></i>
+      </div>
+      <div class="user-info">
+        <div class="user-name">Денис<br>Ворончихин</div>
+        <div class="user-desc"></div>
+      </div>
+    </div>
+    <div class="links-list">
+      <div class="link-title">Задачи</div>
+      <div class="link-item">
+        <a routerLink="list">Список</a>
+      </div>
+      <div class="link-item active">
+        <a routerLink="add">Добавить</a>
+      </div>
+      <div class="link-item">
+        <a routerLink="history">История</a>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <router-outlet></router-outlet>
+    <ng-scrollbar></ng-scrollbar>
+  </div>
+</div>

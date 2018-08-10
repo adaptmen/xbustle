@@ -4,9 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { HttpModule } from '@angular/http';
+import { UserModule } from './user/user.module';
 
 import { AuthService } from './shared/services/auth.service';
 import { UserService } from './user/user.service';
+import { TasksService } from './user/tasks/tasks.service';
+import { TeamService } from './team/team.service';
 
 import { AppComponent } from './app.component';
 
@@ -18,11 +21,14 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    HttpModule
+    HttpModule,
+    UserModule
   ],
   providers: [
     AuthService,
-    //UserService
+    UserService,
+    TasksService,
+    TeamService
   ],
   bootstrap: [AppComponent]
 })

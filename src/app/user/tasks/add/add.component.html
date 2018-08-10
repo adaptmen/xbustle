@@ -1,0 +1,44 @@
+<div class="title">Добавить задачу</div>
+<form [formGroup]="formTask" (ngSubmit)="addTask()">
+  <div class="content_block">
+    <div class="label">
+      Название
+    </div>
+    <div class="input">
+      <input formControlName="title" type="text">
+    </div>
+  </div>
+  <div class="content_block">
+    <div class="label">
+      Общее описание
+    </div>
+    <div class="input">
+      <input formControlName="desc" type="text">
+    </div>
+  </div>
+  <div class="content_block">
+    <div class="label">
+      Исполнитель
+    </div>
+    <div class="input">
+      <select formControlName="executer">
+        <option *ngFor="let cpnion of companions" value="{{ cpnion.userNum }}">
+          {{ cpnion.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="content_block">
+    <div class="label">
+      Примечания
+    </div>
+    <div class="input-area">
+      <textarea type="text" formControlName="notes" (keydown.control.shift)="addNote($event)"></textarea>
+      <div class="tip"><span>Нажмите Ctrl + Shift для добавления</span></div>
+    </div>
+    <div class="notes">
+      <div *ngFor="let note of notes" class="note">{{ note }}</div>
+    </div>
+  </div>
+  <button type="button" (click)="addTask()">Создать</button>
+</form>

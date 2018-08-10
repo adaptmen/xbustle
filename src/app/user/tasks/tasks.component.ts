@@ -10,36 +10,10 @@ import { TasksService } from './tasks.service';
 })
 export class TasksComponent implements OnInit {
 
-  constructor(
-    private teamService: TeamService,
-    private tasksService: TasksService
-  ) { }
-  
-  formTask: FormGroup;
-  private companions;
+  constructor() {  }  
   
   ngOnInit() {
-    this.formTask = new FormGroup({
-      'title': new FormControl(null, [Validators.required]),
-      'desc': new FormControl(null, [Validators.required]),
-      'executer': new FormControl(null, [Validators.required])
-    });
     
-    this.teamService.getAll()
-      .subscribe(
-        (res) => {
-          this.companions = res;
-        }
-      );
-  }
-  
-  onSubmit() {
-    this.tasksService.add(this.formTask.value)
-      .subscribe(
-        (res) => {
-          console.log(res)
-        }
-      );
   }
 
 }

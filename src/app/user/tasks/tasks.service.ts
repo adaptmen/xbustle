@@ -10,8 +10,8 @@ export class TasksService {
   
   constructor(private http: Http) {}
   
-  add(formData: object) {
-    return this.http.post('http://localhost:3000/api/task/add', formData)
+  public add(formData: object) {
+    return this.http.post('http://localhost:3000/api/tasks/add', { task: formData })
             .pipe(map(res => res.json()));
   }
   

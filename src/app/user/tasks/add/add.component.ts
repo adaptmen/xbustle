@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { TeamService } from '../../../team/team.service';
-import { TasksService } from '../tasks.service';
+import { TeamService } from '@team/team.service';
+import { TasksService } from '@user/tasks/tasks.service';
+import { SocketService } from '@shared/services/socket.service';
 
 @Component({
   selector: 'xb-add',
@@ -12,16 +13,18 @@ export class AddComponent implements OnInit {
 
   constructor(
     private teamService: TeamService,
-    private tasksService: TasksService
+    private tasksService: TasksService,
+    private socketService: SocketService
   ) 
   {
     this.teamService = teamService;
     this.tasksService = tasksService;
+    this.socketService = socketService;
   }
   
-  private formTask: FormGroup;
-  private companions = [];
-  private notes = [];
+  public formTask: FormGroup;
+  public companions = [];
+  public notes = [];
   
   
   ngOnInit() {
@@ -33,11 +36,12 @@ export class AddComponent implements OnInit {
     });
     
     this.teamService.getAll()
-      .subscribe(
-        (res) => {
-          this.companions = res.result;
-        }
-      );
+    .subscribe(
+      (res) => {
+        this.companions = res.result;
+      }
+    );
+    
   }
   
   

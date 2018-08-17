@@ -2,7 +2,7 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { StatusNote } from "../models/status-note.model";
+import { StatusNote } from "@models/status-note.model";
 
 
 @Injectable()

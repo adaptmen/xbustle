@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { StatusNote } from "../../models/status-note.model";
+import { StatusNote } from "@models/status-note.model";
 
 
 @Injectable()
@@ -19,7 +19,7 @@ export class AuthService implements CanActivate {
     return this.http.get('http://localhost:3000/api/user/islogged')
     .pipe(
       map(res => res.json()), 
-      map((res: StatusNote) => { 
+      map((res: StatusNote) => {
         return res.status_code == "user_found" ? true : false
       })
     );
@@ -31,7 +31,7 @@ export class AuthService implements CanActivate {
   }
   
   signup(formData: object): Observable<any> {
-     return this.http.post('http://localhost:3000/api/user/signup', { user: formData })
+     return this.http.post('http://localhost:3000/api/user/signup', formData)
     .pipe(map((res) => {return res.json()}));
   }
   

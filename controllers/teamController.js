@@ -1,4 +1,4 @@
-import express from 'express';
+var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 var Cookies = require('cookies');
@@ -21,6 +21,9 @@ router.get('/api/team/getall', (req, res) => {
     .get()
     .then(
       (result) => {
+        userService.sock.connect((s) => {
+          userService.sock.send.self('test', result)
+        });
         result !== []
           ? res.send(sendy("db_success", result))
           : res.send(sendy("team_not_found"));

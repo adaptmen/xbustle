@@ -2,127 +2,136 @@ var mysql = require('mysql');
 var dbConfig = require('../config/config.json');
 
 var dbContext = () => {
-    
-    let _db = {
-        query: (sql, success, error) => {
-            var db = mysql.createConnection(dbConfig.database);
 
-            db.connect();
-            db.query(sql, function (err, res) {
-                err ? error(err) : success(res);
-            });
-            db.end();
-        }
-    };
+  let _db = {
+    query: (sql, success, error) => {
+      var db = mysql.createConnection(dbConfig.database);
 
-    var sqlGenerator = {
-        
-        where: (params) => {
-            let _search = [];
+      db.connect();
+      db.query(sql, function (err, res) {
+        err ? error(err) : success(res);
+      });
+      db.end();
+    }
+  };
 
-            for (let key in params) {
-                _search.push(key + "='" + params[key]);
-            }
-            
-            return " WHERE " + _search.join("' AND ") + "' ";
-        },
-        
-        set: (params) => {
-            let _search = [];
+  var sqlGenerator = {
 
-            for (let key in params) {
-                _search.push(key + "='" + params[key]);
-            }
-            
-            return " SET " + _search.join("' AND ") + "' ";
-        },
-        
-        insert: (_query) => {
-            let result_str = "INSERT INTO `" + _query.tableName + "`";
+    where: (params) => {
+      let _search = [];
 
-            let keys_str, values_str = '';
+      for (let key in params) {
+        _search.push(key + "='" + params[key]);
+      }
 
-            for (let key in _query.params) {
-                keys_str += "`" + key + "`,";
-                values_str += "'" + _query.params[key] + "',";
-            }
+      return " WHERE " + _search.join("' AND ") + "' ";
+    },
 
-            result_str += "(" +
-                keys_str.slice(0, keys_str.length - 1) +
-                ")" +
-                " VALUES (" +
-                values_str.slice(0, values_str.length - 1) +
-                ")";
+    set: (params) => {
+      let _search = [];
 
-            return result_str.replace('undefined', '');
-        },
+      for (let key in params) {
+        _search.push(key + "='" + params[key]);
+      }
 
-        get: (_query) => {
-            return "SELECT * FROM " + _query.tableName + sqlGenerator.where(_query.where);
-        },
-        
-        update: (_query) => {
-            return "UPDATE " + _query.tableName + sqlGenerator.set(_query.set) + sqlGenerator.where(_query.where);
-        }
-    };
+      return " SET " + _search.join("' AND ") + "' ";
+    },
 
-    let factory = function (_query, method) {
-        let sql = method(_query);
-        return new Promise((resolve, reject) => {
-            console.log(sql);
-            _db.query(sql, resolve, reject);
-            _query = {};
-        });
-    };
+    insert: (_query) => {
+      let result_str = "INSERT INTO `" + _query.tableName + "`";
+      let keys_str, values_str = '';
+      
+      console.log(_query);
 
-    let _query = {};
-    
-    let db_obj = function (data) {
-        return {
-            _query: data,
-            insert: insert,
-            get: get,
-            where: where,
-            table: table,
-            set: set
-        }
-    };
+      for (let key in _query.params) {
+        keys_str += "`" + key + "`,";
+        values_str += "'" + _query.params[key] + "',";
+      }
 
-    var table = (tableName) => {
-        _query.tableName = tableName;
-        return new db_obj(_query);
-    };
-    
-    var where = (params) => {
-        _query.where = params;
-        return new db_obj(_query);
-    };
-    
-    var set = (params) => {
-        _query.set = params;
-        return new db_obj(_query);
-    };
-    
-    var get = () => {
-        return factory(_query, sqlGenerator.get);
-    };
-    
-    var insert = () => {
-        return factory(_query, sqlGenerator.insert);
-    };
-    
-    var update = () => {
-        return factory(_query, sqlGenerator.update);
-    };
-    
+      result_str += "(" +
+        keys_str.slice(0, keys_str.length - 1) +
+        ")" +
+        " VALUES (" +
+        values_str.slice(0, values_str.length - 1) +
+        ")";
 
+      return result_str.replace('undefined', '');
+    },
+
+    get: (_query) => {
+      return "SELECT * FROM " + _query.tableName + sqlGenerator.where(_query.where);
+    },
+
+    update: (_query) => {
+      return "UPDATE " + _query.tableName + sqlGenerator.set(_query.set) + sqlGenerator.where(_query.where);
+    }
+  };
+
+  let factory = function (_query, method) {
+    let sql = method(_query);
+    return new Promise((resolve, reject) => {
+      console.log(sql);
+      _db.query(sql, resolve, reject);
+      _query = {};
+    });
+  };
+
+  let _query = {};
+
+  let db_obj = function (query) {
     return {
-        table: table,
-        where: where,
-        get: get,
-        insert: insert,
-        update: update
-    };
+      _query: query,
+      insert,
+      get,
+      where,
+      table,
+      set,
+      params
+    }
+  };
+
+  var table = (tableName) => {
+    _query.tableName = tableName;
+    return new db_obj(_query);
+  };
+
+  var where = (params) => {
+    _query.where = params;
+    return new db_obj(_query);
+  };
+
+  var set = (params) => {
+    _query.set = params;
+    return new db_obj(_query);
+  };
+
+  var params = (params) => {
+    console.log(params);
+    _query.params = params;
+    return new db_obj(_query);
+  };
+
+  var get = () => {
+    return factory(_query, sqlGenerator.get);
+  };
+
+  var insert = () => {
+    return factory(_query, sqlGenerator.insert);
+  };
+
+  var update = () => {
+    return factory(_query, sqlGenerator.update);
+  };
+
+
+  return {
+    table,
+    where,
+    get,
+    insert,
+    update,
+    params
+  };
 
 };
 

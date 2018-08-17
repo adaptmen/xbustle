@@ -6,6 +6,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var cors = require('cors');
+var session = require('express-session');
+
 
 var api_controller = require('./controllers/apiController');
 
@@ -18,6 +21,13 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist/xbustle')));
+
+app.use(session({
+  secret: 'xbustle_secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
 
 app.all('/api/*', api_controller);
 

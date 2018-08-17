@@ -21,13 +21,13 @@ var generateToken = generateSecret;
 
 var generateLogin = (email) => {
   let name = email.match('([^@]+)@([^@]+)')[1];
-  return `${name}${Math.random(161825)}`;
+  return `${name}_${Math.floor(Math.random() * 161825)}`;
 };
 
 
 module.exports = {
   generateToken: generateToken,
-  generatePassword: generateSecret().slice(0, 13),
+  generatePassword: () => { return generateSecret().slice(0, 13) },
   generateLogin: generateLogin,
   currentUser: currentUser,
   sock: sock

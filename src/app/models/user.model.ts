@@ -5,6 +5,11 @@ export class User {
     public name: string,
     public teamNum: number,
     public userNum: number,
-    public email: string
+    public email: string,
+    public token: string,
+    public created_at: string,
+    public status: string,
+    public inn: string,
+    public isValid: boolean
   ) {}
 }

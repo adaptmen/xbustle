@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import io from '../../../assets/socket.io';
+import io from '@assets/socket.io';
 
 @Injectable()
 export class SocketService {
@@ -13,7 +13,7 @@ export class SocketService {
     this.socket.on("connect", () => this.connect());
     this.socket.on("disconnect", () => this.disconnect());
     this.socket.on("error", (error: string) => {
-        console.log(`ERROR: "${error}" (${this.host})`);
+        console.log(`ERROR: "${error}"`);
     });
   }
   
@@ -27,7 +27,7 @@ export class SocketService {
   
   on(event_name) {
     return new Observable<any>(observer => {
-        this.socket.off(event_name); //Если такое событие уже существует
+        this.socket.off(event_name);
         this.socket.on(event_name, (data) => {
           observer.next(data);
         });
@@ -38,10 +38,8 @@ export class SocketService {
     return new Observable<any>(observer => {
       this.socket.emit(chanel, message, function (data) {
         if (data.success) {
-            // Успех
           observer.next(data.msg);
         } else {
-            // Что-то пошло не так
           observer.error(data.msg);
         }
         observer.complete();

@@ -1,17 +1,19 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../core/db')();
+var userService = require('../core/user-service');
 var Cookies = require('cookies');
 var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({
     extended: false
 });
+var sendy = require('../core/sendy/sendy.js');
 
 
-router.post('/tasks/add', urlencodedParser, (req, res) => {
+router.post('/api/tasks/add', urlencodedParser, (req, res) => {
     let task = req.body.task;
-  
-    db.table('tasks').insert(task).then(
+    task.maker = userService.currentUser.userNum;
+    db.table('tasks').params(task).insert().then(
       result => res.send(sendy('task_saved')),
       err => res.send(sendy('task_not_saved'))
     );

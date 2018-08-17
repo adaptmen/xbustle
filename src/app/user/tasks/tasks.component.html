@@ -5,7 +5,7 @@
         <i class="mdi mdi-account-circle"></i>
       </div>
       <div class="user-info">
-        <div class="user-name">Денис<br>Ворончихин</div>
+        <div class="user-name" *ngIf="currentUser !== undefined">{{ currentUser.name }}</div>
         <div class="user-desc"></div>
       </div>
     </div>
@@ -24,6 +24,5 @@
   </div>
   <div class="right">
     <router-outlet></router-outlet>
-    <ng-scrollbar></ng-scrollbar>
   </div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'xb-reg',
@@ -21,7 +21,7 @@ export class RegComponent implements OnInit {
   }
   
   onSubmit() {
-    this.authService.login(this.formSignup.value)
+    this.authService.signup(this.formSignup.value)
       .subscribe(
         (res) => {
           console.log(res)
@@ -29,7 +29,4 @@ export class RegComponent implements OnInit {
       );
   }
   
-  onClick() {
-  }
-
 }

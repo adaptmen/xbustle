@@ -14,8 +14,8 @@
     </div>
     <div class="right btns">
 <!--     <i class="mdi mdi-email-outline"></i>-->
-      <div class="btn-combo">
-        Денис
+      <div class="btn-combo" *ngIf="currentUser !== undefined">
+        {{ currentUser.name }}
         <div class="combo">
           <div class="combo-item">
             <a routerLink="/settings">Настройки</a>

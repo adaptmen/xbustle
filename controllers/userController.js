@@ -5,13 +5,12 @@ var socketContext = require('../core/socket');
 var urlencodedParser = require("body-parser").urlencoded({
   extended: false
 });
-var io = require('socket.io').listen(4040);
 var db = require("../core/db")();
 var sendy = require("../core/sendy/sendy");
 var dobby = require("../core/dobby");
 var userService = require("../core/user-service");
 var isEmail = require('validator').isEmail;
-var isEmpthy = require('validator').isEmpthy;
+var isEmpty = require('validator').isEmpty;
 
 router.post('/api/user/login', (req, res) => {
   let user = req.body.user;
@@ -31,21 +30,21 @@ router.post('/api/user/login', (req, res) => {
             let cookies = new Cookies(req, res);
             userService.currentUser = result[0];
             cookies.set('token', result[0].token);
-            res.end(sendy("db_success"));
+            res.send(sendy("user_found"));
           })()
           :
-          res.end(sendy("user_not_found"));
+          res.send(sendy("user_not_found"));
       },
       (error) => {
-        res.end(sendy("db_connection_error", error));
+        res.send(sendy("db_connection_error", error));
       }
     );
 });
 
 router.get('/api/user/islogged', (req, res) => {
   userService.currentUser !== {}
-    ? res.end(sendy("user_logged"))
-    : res.end(sendy("user_not_logged"))
+    ? res.send(sendy("user_logged"))
+    : res.send(sendy("user_not_logged"))
 });
 
 
@@ -53,7 +52,7 @@ router.get('/api/user/logout', function (req, res) {
   let cookies = new Cookies(req, res);
   cookies.set('token', '');
   userService.currentUser = {};
-  res.end(sendy("user_exited"));
+  res.send(sendy("user_exited"));
 });
 
 
@@ -61,7 +60,7 @@ router.get('/api/user/logout', function (req, res) {
 router.post('/api/user/signup', urlencodedParser, (req, res) => {
   let email = req.body.email;
 
-  if (!isEmpthy(req.body.email)) {
+  if (!isEmpty(req.body.email)) {
     if (isEmail(email)) {
       let token = userService.generateToken();
       let login = userService.generateLogin(email);
@@ -80,19 +79,19 @@ router.post('/api/user/signup', urlencodedParser, (req, res) => {
             dobby.sendMail(email, login, password)
             .then(
               (info) => {
-                res.end(sendy("email_success", info))
+                res.send(sendy("email_success", info))
               },
               (err) => {
-                res.end(sendy("email_error", err))
+                res.send(sendy("email_error", err))
               }
             )
           },
           (err) => {
-            res.end(sendy("db_connection_error", err));
+            res.send(sendy("db_connection_error", err));
           }
         );
     } else {
-      res.end(sendy("email_invalid"));
+      res.send(sendy("email_invalid"));
     }
   }
 

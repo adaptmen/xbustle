@@ -1,0 +1,35 @@
+<div class="title">Личные данные</div>
+<form
+ *ngIf="!!formUser"
+ [formGroup]="formUser"
+ (ngSubmit)="onSubmit()"
+>
+  <div class="content_block">
+    <div class="label">
+      Имя
+    </div>
+    <div class="input">
+      <input 
+        formControlName="name"
+        type="text"
+      >
+    </div>
+  </div>
+  <div class="content_block">
+    <div class="label">
+      Логин для входа
+    </div>
+    <div class="input">
+      <input formControlName="login" type="text">
+    </div>
+  </div>
+  <div class="content_block">
+    <div class="label">
+      Пароль
+    </div>
+    <div class="input">
+      <input formControlName="password" type="text">
+    </div>
+  </div>
+  <button type="submit">Редактировать</button>
+</form>

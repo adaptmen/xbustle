@@ -20,31 +20,33 @@ router.all('*', (req, res, next) => {
     if (userService.currentUser !== {}) {
       console.log(cookie.get('token'));
       db
-        .table('users')
-        .where({
-          token: cookie.get('token')
-        })
-        .get()
-        .then(
-          (result) => {
-            console.log("user_init: " + result);
-            userService.sock.connect((s) => {
-              userService.sock.send.self('user_init', result[0])
-            });
+      .table('users')
+      .where({
+        token: cookie.get('token')
+      })
+      .get()
+      .then(
+        (result) => {
+          console.log("user_init: " + result);
+          userService.sock.connect(() => {
+            userService.sock.send.self('user_init', result[0])
+          });
 
-            result !== [] ?
-              (() => {
-                let cookies = new Cookies(req, res);
-                userService.currentUser = result[0];
-                cookies.set('token', result[0].token);
-                next();
-              })() :
-              res.send(sendy("user_not_found"));
-          },
-          (error) => {
-            res.send(sendy("db_connection_error", error));
-          }
-        )
+          result !== []
+            ?
+            (() => {
+              let cookies = new Cookies(req, res);
+              userService.currentUser = result[0];
+              cookies.set('token', result[0].token);
+              next();
+            })()
+            :
+            res.send(sendy("user_not_found"));
+        },
+        (error) => {
+          res.send(sendy("db_connection_error", error));
+        }
+      )
     }
   }
 });

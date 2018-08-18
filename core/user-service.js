@@ -20,8 +20,11 @@ let generateSecret = () => {
 var generateToken = generateSecret;
 
 var generateLogin = (email) => {
-  let name = email.match('([^@]+)@([^@]+)')[1];
-  return `${name}_${Math.floor(Math.random() * 161825)}`;
+  let name =
+      email // emma55ex66yyyy@server.com
+      .match('([^@]+)@([^@]+)')[1] // emma55ex66yyyy
+      .match('([^0-9]+)([0-9]+)')[1]; // emma
+  return `${name}_${Math.floor(Math.random() * 161825)}` // emma_10437
 };
 
 

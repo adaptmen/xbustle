@@ -7,8 +7,7 @@ import {
 } from '@angular/router';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { StatusNote } from "@models/status-note.model";
-
+import { Answer } from "@models/answer.model";
 
 @Injectable()
 export class AuthService implements CanActivate {
@@ -19,7 +18,7 @@ export class AuthService implements CanActivate {
     return this.http.get('http://localhost:3000/api/user/islogged')
     .pipe(
       map(res => res.json()), 
-      map((res: StatusNote) => {
+      map((res: Answer) => {
         return res.status_code == "user_found" ? true : false
       })
     );

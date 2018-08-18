@@ -7,6 +7,7 @@ import { ScrollbarModule } from 'ngx-scrollbar';
 import { UserComponent } from './user.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AddComponent } from './tasks/add/add.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { AddComponent } from './tasks/add/add.component';
   declarations: [
     UserComponent,
     TasksComponent,
-    AddComponent
+    AddComponent,
+    SettingsComponent
   ]
 })
 export class UserModule { }

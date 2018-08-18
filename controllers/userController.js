@@ -29,7 +29,7 @@ router.post('/api/user/login', (req, res) => {
           (() => {
             let cookies = new Cookies(req, res);
             userService.currentUser = result[0];
-            cookies.set('token', result[0].token);
+            cookies.set('token', result[0].token, { expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000) });
             res.send(sendy("user_found"));
           })()
           :
@@ -66,30 +66,31 @@ router.post('/api/user/signup', urlencodedParser, (req, res) => {
       let login = userService.generateLogin(email);
       let password = userService.generatePassword();
 
-      db.table('users')
-        .params({
-          login,
-          password,
-          token,
-          created_at: (new Date()).toISOString()
-        })
-        .insert()
-        .then(
-          (result) => {
-            dobby.sendMail(email, login, password)
-            .then(
-              (info) => {
-                res.send(sendy("email_success", info))
-              },
-              (err) => {
-                res.send(sendy("email_error", err))
-              }
-            )
-          },
-          (err) => {
-            res.send(sendy("db_connection_error", err));
-          }
-        );
+      db
+      .table('users')
+      .params({
+        login,
+        password,
+        token,
+        created_at: (new Date()).toISOString()
+      })
+      .insert()
+      .then(
+        (result) => {
+          dobby.sendMail(email, login, password)
+          .then(
+            (info) => {
+              res.send(sendy("email_success", info))
+            },
+            (err) => {
+              res.send(sendy("email_error", err))
+            }
+          )
+        },
+        (err) => {
+          res.send(sendy("db_connection_error", err));
+        }
+      );
     } else {
       res.send(sendy("email_invalid"));
     }

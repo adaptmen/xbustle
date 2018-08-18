@@ -1,7 +1,7 @@
-export class StatusNote {
+export class Answer {
   constructor(
     public status_code: string,
     public status_text: string,
-    public error: string
+    public result: any
   ) {}
 }
